@@ -1,0 +1,28 @@
+.grid {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: var(--space-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0b0b12;
+}
+.cell--floor { background: var(--cell-floor); }
+.cell--wall { background: var(--cell-wall); }
+.cell--start { background: var(--cell-start); }
+.cell--end { background: var(--cell-end); }
+.cell--treasure { background: var(--cell-floor); }
+.cell--treasure::after { content: ""; width: 40%; height: 40%; background: var(--cell-treasure); transform: rotate(45deg); }
+.cell--enemy { background: var(--cell-floor); }
+.cell--enemy::after { content: ""; width: 45%; height: 45%; background: var(--cell-enemy); border-radius: 50%; }

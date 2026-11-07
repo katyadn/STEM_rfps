@@ -1,0 +1,27 @@
+/* Дизайн-токени: змінюєш тут — змінюється весь сайт */
+:root {
+  --bg: #12111a;
+  --surface: #1b1a26;
+  --surface-2: #252433;
+  --border: #34324a;
+  --text: #e9e7f5;
+  --text-muted: #9a97b5;
+  --accent: #8b6cf6;
+  --accent-text: #ffffff;
+
+  /* кольори клітинок */
+  --cell-floor: #1f1e2c;
+  --cell-wall: #4a4570;
+  --cell-start: #22d3ee;
+  --cell-end: #f472b6;
+  --cell-treasure: #facc15;
+  --cell-enemy: #f87171;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --radius: 10px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
