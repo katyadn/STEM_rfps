@@ -91,7 +91,7 @@ export default function Generator() {
   return (
     <div className="page generator">
       <div className="generator-main">
-        <section className="panel">
+        <section className="panel level-panel">
           <div className="level-head">
             <h2>{level.name}</h2>
             <span>{level.width}×{level.height}</span>
@@ -103,7 +103,7 @@ export default function Generator() {
             path={showPath ? level.path : null}
           />
           <ul className="legend" aria-label="Умовні позначення">
-            {LEGEND.map(([type, name]) => (
+            {(showPath ? [...LEGEND, ["path", "Найкоротший шлях"]] : LEGEND).map(([type, name]) => (
               <li key={type}>
                 <span className={`swatch swatch--${type}`} aria-hidden="true" />
                 {name}

@@ -4,9 +4,8 @@ import "./MetricsPanel.css";
 export default function MetricsPanel({ level }) {
   const m = getMetrics(level);
 
-  const stats = [
+  const rows = [
     ["Розмір", `${level.width}×${level.height}`],
-    ["Найкоротший шлях", `${m.pathLength} кроків`],
     ["Стіни", `${m.wallPercent.toFixed(0)}%`],
     ["Прохідних клітинок", m.walkable],
     ["Вороги", `${m.enemies} (${m.enemiesPer100.toFixed(1)} на 100 кл.)`],
@@ -16,33 +15,39 @@ export default function MetricsPanel({ level }) {
 
   return (
     <section className="panel metrics" aria-labelledby="metrics-title">
-      <header className="metrics-head">
-        <h2 id="metrics-title">Метрики рівня</h2>
-        <span className={`badge ${m.hasPath ? "badge--ok" : "badge--bad"}`}>
-          {m.hasPath ? "Шлях існує" : "Шляху немає"}
-        </span>
-      </header>
+      <h2 id="metrics-title">Метрики рівня</h2>
 
-      <div className="metrics-summary">
-        <div
-          className="score"
-          aria-label={`Індекс збалансованості: ${m.balance} зі 100`}
-        >
-          <strong>{m.balance}</strong>
-          <span>/100</span>
+      <div className="key-metrics">
+        <div className="key">
+          <span className="key-label">Шлях до виходу</span>
+          <strong className={`key-value ${m.hasPath ? "is-ok" : "is-bad"}`}>
+            {m.hasPath ? "Існує" : "Не існує"}
+          </strong>
+          <span className="key-sub">
+            {m.hasPath ? `${m.pathLength} кроків` : "рівень не проходиться"}
+          </span>
         </div>
-        <div>
-          <p className="verdict">Індекс збалансованості</p>
-          <p className="muted">орієнтовний</p>
-          <p className="muted">
-            Оціночна складність: {m.difficulty.label} ({m.difficulty.percent}%)
-          </p>
+        <div className="key">
+          <span className="key-label">Збалансованість</span>
+          <strong
+            className="key-value"
+            aria-label={`Індекс збалансованості: ${m.balance} зі 100`}
+          >
+            {m.balance}
+            <small>/100</small>
+          </strong>
+          <span className="key-sub">орієнтовний індекс</span>
+        </div>
+        <div className="key">
+          <span className="key-label">Складність</span>
+          <strong className="key-value key-value--cap">{m.difficulty.label}</strong>
+          <span className="key-sub">{m.difficulty.percent}%</span>
         </div>
       </div>
 
-      <dl className="stats">
-        {stats.map(([name, value]) => (
-          <div className="stat" key={name}>
+      <dl className="rows">
+        {rows.map(([name, value]) => (
+          <div className="row" key={name}>
             <dt>{name}</dt>
             <dd>{value}</dd>
           </div>

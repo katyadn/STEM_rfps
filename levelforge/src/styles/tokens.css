@@ -14,8 +14,8 @@
   /* кольори клітинок */
   --cell-floor: #1f1e2c;
   --cell-wall: #4f4c63;
-  --cell-start: #39a4f5;
-  --cell-end: #ed4545;
+  --cell-start: #ecf7ff;
+  --cell-end: #3388ff;
   --cell-treasure: #facc15;
   --cell-enemy: #d52828;
   --cell-path: #25df66b0;
