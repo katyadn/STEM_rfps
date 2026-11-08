@@ -64,7 +64,7 @@ const TYPES = {
 };
 
 // Перетворює текстову мапу на масив рядків із типами клітинок
-function parse(level) {
+export function parse(level) {
   return {
     ...level,
     size: level.map.length,
@@ -86,3 +86,9 @@ export function fetchLevel({ difficulty } = {}) {
     }, 600);
   });
 }
+
+export const DIFFICULTY_LABELS = {
+  easy: "Легка",
+  medium: "Середня",
+  hard: "Складна",
+};

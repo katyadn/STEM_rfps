@@ -1,0 +1,12 @@
+.page-title { font-size: 1.4rem; margin: 0 0 var(--space-4); }
+.gallery-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+.gallery-card { display: grid; gap: var(--space-2); align-content: start; }
+.gallery-card h2 { margin: var(--space-2) 0 0; font-size: 1rem; }
+.gallery-meta { margin: 0; color: var(--text-muted); font-size: 0.85rem; }

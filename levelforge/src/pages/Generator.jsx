@@ -1,19 +1,37 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Grid from "../components/Grid";
+import { useAuth } from "../context/AuthContext";
 import { levels, fetchLevel } from "../data/levels";
+import { saveLevel } from "../services/gallery";
 
 export default function Generator() {
-  const [level, setLevel] = useState(levels[0]);
+  const { user } = useAuth();
+  const location = useLocation();
+
+  // Рівень можна відкрити з галереї (передається через стан маршруту)
+  const [level, setLevel] = useState(() => location.state?.level ?? levels[0]);
   const [status, setStatus] = useState("idle"); // idle | loading | error
   const [difficulty, setDifficulty] = useState("");
+  const [saveMessage, setSaveMessage] = useState(null); // { ok, text }
 
   async function handleGenerate() {
     setStatus("loading");
+    setSaveMessage(null);
     try {
       setLevel(await fetchLevel({ difficulty }));
       setStatus("idle");
     } catch {
       setStatus("error");
+    }
+  }
+
+  function handleSave() {
+    try {
+      saveLevel(user.id, level);
+      setSaveMessage({ ok: true, text: "Рівень збережено в галерею" });
+    } catch (err) {
+      setSaveMessage({ ok: false, text: err.message });
     }
   }
 
@@ -39,15 +57,36 @@ export default function Generator() {
             <option value="hard">Складна</option>
           </select>
         </div>
-        <button
-          className="btn"
-          onClick={handleGenerate}
-          disabled={status === "loading"}
-        >
-          {status === "loading" ? "Генерація…" : "Згенерувати"}
-        </button>
+
+        <div className="actions">
+          <button
+            className="btn"
+            onClick={handleGenerate}
+            disabled={status === "loading"}
+          >
+            {status === "loading" ? "Генерація…" : "Згенерувати"}
+          </button>
+          <button
+            className="btn btn--secondary"
+            onClick={handleSave}
+            disabled={status === "loading"}
+          >
+            Зберегти в галерею
+          </button>
+        </div>
+
         {status === "error" && (
-          <p role="alert">Не вдалося завантажити рівень. Спробуйте ще раз.</p>
+          <p role="alert" className="form-error">
+            Не вдалося завантажити рівень. Спробуйте ще раз.
+          </p>
+        )}
+        {saveMessage && (
+          <p
+            role="status"
+            className={saveMessage.ok ? "save-ok" : "form-error"}
+          >
+            {saveMessage.text}
+          </p>
         )}
       </aside>
     </div>

@@ -26,3 +26,7 @@
 .cell--treasure::after { content: ""; width: 40%; height: 40%; background: var(--cell-treasure); transform: rotate(45deg); }
 .cell--enemy { background: var(--cell-floor); }
 .cell--enemy::after { content: ""; width: 45%; height: 45%; background: var(--cell-enemy); border-radius: 50%; }
+
+/* Мініатюра для галереї */
+.grid--compact { gap: 1px; padding: var(--space-1); max-width: none; }
+.grid--compact .cell { border-radius: 1px; }

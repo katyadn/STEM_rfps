@@ -2,12 +2,32 @@ import "./Grid.css";
 
 const LABELS = { start: "S", end: "E" };
 
-export default function Grid({ cells }) {
+// compact: мініатюра для галереї (без підписів клітинок)
+export default function Grid({ cells, compact = false, label }) {
   const size = cells.length;
+  const style = { gridTemplateColumns: `repeat(${size}, 1fr)` };
+
+  if (compact) {
+    return (
+      <div
+        className="grid grid--compact"
+        style={style}
+        role="img"
+        aria-label={label ?? `Рівень ${size} на ${size}`}
+      >
+        {cells.flatMap((row, y) =>
+          row.map((type, x) => (
+            <div key={`${x}-${y}`} className={`cell cell--${type}`} />
+          ))
+        )}
+      </div>
+    );
+  }
+
   return (
     <div
       className="grid"
-      style={{ gridTemplateColumns: `repeat(${size}, 1fr)` }}
+      style={style}
       role="grid"
       aria-label={`Ігрова сітка ${size} на ${size}`}
     >
