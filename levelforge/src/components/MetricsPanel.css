@@ -1,0 +1,17 @@
+.metrics-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); }
+.metrics-head h2 { margin: 0; }
+.badge { padding: var(--space-1) var(--space-3); border-radius: 999px; font-size: 0.8rem; font-weight: 600; border: 1px solid currentColor; }
+.badge--ok { color: var(--success); }
+.badge--bad { color: var(--danger); }
+.metrics-summary { display: flex; align-items: center; gap: var(--space-4); margin: var(--space-4) 0; }
+.score strong { font-size: 2.6rem; line-height: 1; }
+.score span { color: var(--text-muted); }
+.verdict { margin: 0; font-weight: 600; }
+.muted { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-2); margin: 0; }
+.stat { background: var(--surface-2); border-radius: var(--radius); padding: var(--space-2) var(--space-3); }
+.stat dt { color: var(--text-muted); font-size: 0.8rem; }
+.stat dd { margin: 0; font-weight: 600; }
+.metrics-note { margin-top: var(--space-4); color: var(--text-muted); font-size: 0.9rem; }
+.metrics-note summary { cursor: pointer; color: var(--text); }
+.metrics-note p { margin: var(--space-2) 0 0; }

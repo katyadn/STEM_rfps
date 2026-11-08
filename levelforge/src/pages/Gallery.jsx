@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Grid from "../components/Grid";
 import { useAuth } from "../context/AuthContext";
-import { DIFFICULTY_LABELS } from "../data/levels";
+import { DENSITY_LABELS } from "../data/levels";
 import { deleteLevel, getSavedLevels } from "../services/gallery";
 import "./Gallery.css";
 
@@ -37,8 +37,8 @@ export default function Gallery() {
               <Grid compact cells={level.cells} label={`Мініатюра: ${level.name}`} />
               <h2>{level.name}</h2>
               <p className="gallery-meta">
-                {DIFFICULTY_LABELS[level.difficulty] ?? "—"} · {level.size}×
-                {level.size} ·{" "}
+                {level.width}×{level.height} · стіни:{" "}
+                {DENSITY_LABELS[level.density] ?? "—"} ·{" "}
                 {new Date(level.savedAt).toLocaleDateString("uk-UA")}
               </p>
               <div className="actions">

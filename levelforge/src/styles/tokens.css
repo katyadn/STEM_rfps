@@ -1,3 +1,4 @@
+/* Дизайн-токени: змінюєш тут — змінюється весь сайт */
 :root {
   --bg: #12111a;
   --surface: #1b1a26;
@@ -8,14 +9,16 @@
   --accent: #8b6cf6;
   --accent-text: #ffffff;
   --danger: #f87171;
+  --success: #34d399;
 
   /* кольори клітинок */
   --cell-floor: #1f1e2c;
-  --cell-wall: #4a4570;
-  --cell-start: #22d3ee;
-  --cell-end: #f472b6;
+  --cell-wall: #4f4c63;
+  --cell-start: #39a4f5;
+  --cell-end: #ed4545;
   --cell-treasure: #facc15;
-  --cell-enemy: #f87171;
+  --cell-enemy: #d52828;
+  --cell-path: #25df66b0;
 
   --space-1: 4px;
   --space-2: 8px;
