@@ -1,4 +1,5 @@
 // Експорт рівня у файл JSON. Працює повністю в браузері, без сервера.
+// Формат підходить і для майбутнього імпорту (поле format + version).
 export const EXPORT_FORMAT = "levelforge-level";
 
 export function levelToExport(level) {
