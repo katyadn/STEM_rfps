@@ -1,0 +1,111 @@
+.shell { --sidebar-w: 240px; min-height: 100vh; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 56px;
+  padding: 0 var(--space-4);
+}
+/* Коли меню сховане, смуга з кнопкою лишається видимою під час прокрутки */
+.shell:not(.shell--open) .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-brand { font-weight: 700; }
+.menu-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* Бічна панель: фіксована, виїжджає зліва */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  width: var(--sidebar-w);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-3);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%);
+  visibility: hidden; /* закрита панель не потрапляє у Tab-навігацію */
+  transition: transform 0.2s ease, visibility 0s linear 0.2s;
+}
+.shell--open .sidebar {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.2s ease;
+}
+.main { min-width: 0; transition: margin-left 0.2s ease; }
+.shell--open .main { margin-left: var(--sidebar-w); }
+.backdrop { display: none; }
+
+.side-brand { display: flex; align-items: center; gap: var(--space-3); padding: 0 var(--space-2); }
+.side-close { margin-left: auto; width: 32px; height: 32px; }
+.side-brand small, .side-user small { display: block; color: var(--text-muted); font-size: 0.75rem; }
+.logo { width: 32px; height: 32px; border-radius: 8px; background: var(--accent); }
+
+.side-label { margin: 0 0 var(--space-2); padding: 0 var(--space-2); color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.side-nav { display: grid; gap: var(--space-1); }
+.side-nav a {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border-left: 3px solid transparent;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.side-nav a:hover { background: var(--surface-2); color: var(--text); }
+.side-nav a.active { background: var(--surface-2); color: var(--text); border-left-color: var(--accent); }
+
+.side-user {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-3);
+  align-items: center;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+.avatar { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--accent-text); font-weight: 700; font-size: 0.85rem; }
+.side-user-info { min-width: 0; }
+.side-user-info strong, .side-user-info small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.side-logout {
+  grid-column: 1 / -1;
+  background: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  font: inherit;
+  cursor: pointer;
+}
+.side-logout:hover { background: var(--surface-2); }
+
+/* Телефон і планшет: меню виїжджає поверх сторінки */
+@media (max-width: 900px) {
+  .shell--open .main { margin-left: 0; }
+  .shell--open .sidebar { box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); }
+  .shell--open .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.55);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .main { transition: none; }
+}

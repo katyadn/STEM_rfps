@@ -2,47 +2,53 @@ import "./Grid.css";
 
 const LABELS = { start: "S", end: "E" };
 
-// compact: мініатюра для галереї (без підписів клітинок)
-export default function Grid({ cells, compact = false, label }) {
-  const size = cells.length;
-  const style = { gridTemplateColumns: `repeat(${size}, 1fr)` };
+// cellSize — розмір клітинки в px; path — масив [x, y] для підсвітки шляху;
+// compact — мініатюра для галереї
+export default function Grid({ cells, label, compact = false, cellSize = 28, path }) {
+  const width = cells[0].length;
+  const pathSet = path ? new Set(path.map(([x, y]) => `${x},${y}`)) : null;
+
+  const items = cells.flatMap((row, y) =>
+    row.map((type, x) => {
+      const onPath =
+        pathSet?.has(`${x},${y}`) && type !== "start" && type !== "end";
+      return (
+        <div
+          key={`${x}-${y}`}
+          className={`cell cell--${type}${onPath ? " cell--path" : ""}`}
+        >
+          {!compact && cellSize >= 18 ? LABELS[type] : null}
+        </div>
+      );
+    })
+  );
 
   if (compact) {
     return (
       <div
         className="grid grid--compact"
-        style={style}
+        style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}
         role="img"
-        aria-label={label ?? `Рівень ${size} на ${size}`}
+        aria-label={label}
       >
-        {cells.flatMap((row, y) =>
-          row.map((type, x) => (
-            <div key={`${x}-${y}`} className={`cell cell--${type}`} />
-          ))
-        )}
+        {items}
       </div>
     );
   }
 
   return (
-    <div
-      className="grid"
-      style={style}
-      role="grid"
-      aria-label={`Ігрова сітка ${size} на ${size}`}
-    >
-      {cells.flatMap((row, y) =>
-        row.map((type, x) => (
-          <div
-            key={`${x}-${y}`}
-            className={`cell cell--${type}`}
-            role="gridcell"
-            aria-label={`${type}, рядок ${y + 1}, стовпець ${x + 1}`}
-          >
-            {LABELS[type]}
-          </div>
-        ))
-      )}
+    <div className="grid-viewport">
+      <div
+        className="grid"
+        style={{
+          "--cell": `${cellSize}px`,
+          gridTemplateColumns: `repeat(${width}, var(--cell))`,
+        }}
+        role="img"
+        aria-label={label}
+      >
+        {items}
+      </div>
     </div>
   );
 }

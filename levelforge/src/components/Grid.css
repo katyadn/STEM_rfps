@@ -1,20 +1,25 @@
-.grid {
-  display: grid;
-  gap: 3px;
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
+/* Поле з прокруткою: великі карти не ламають сторінку */
+.grid-viewport {
+  overflow: auto;
+  max-width: 100%;
+  max-height: 70vh;
   padding: var(--space-2);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
+.grid {
+  display: grid;
+  grid-auto-rows: var(--cell);
+  gap: 2px;
+  width: max-content;
+  margin: 0 auto;
+}
 .cell {
-  aspect-ratio: 1;
   display: grid;
   place-items: center;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  border-radius: 3px;
+  font-size: calc(var(--cell, 20px) * 0.45);
   font-weight: 700;
   color: #0b0b12;
 }
@@ -27,6 +32,18 @@
 .cell--enemy { background: var(--cell-floor); }
 .cell--enemy::after { content: ""; width: 45%; height: 45%; background: var(--cell-enemy); border-radius: 50%; }
 
+/* Підсвітка найкоротшого шляху */
+.cell--path.cell--floor { background: var(--cell-path); }
+.cell--path.cell--treasure,
+.cell--path.cell--enemy { outline: 2px solid var(--cell-path); outline-offset: -2px; }
+
 /* Мініатюра для галереї */
-.grid--compact { gap: 1px; padding: var(--space-1); max-width: none; }
-.grid--compact .cell { border-radius: 1px; }
+.grid--compact {
+  gap: 1px;
+  padding: var(--space-1);
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.grid--compact .cell { aspect-ratio: 1; border-radius: 1px; }
