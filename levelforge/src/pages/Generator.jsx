@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import CountField from "../components/CountField";
 import Grid from "../components/Grid";
+import Legend from "../components/Legend";
 import MetricsPanel from "../components/MetricsPanel";
 import { useAuth } from "../context/AuthContext";
 import {
@@ -17,10 +18,6 @@ const DEFAULTS = {
 };
 const defaultCell = (width) =>
   width <= 10 ? 40 : width <= 20 ? 28 : width <= 30 ? 22 : 16;
-const LEGEND = [
-  ["start", "Вхід"], ["end", "Вихід"], ["wall", "Стіна"],
-  ["treasure", "Скарб"], ["enemy", "Ворог"],
-];
 
 export default function Generator() {
   const { user } = useAuth();
@@ -102,14 +99,7 @@ export default function Generator() {
             cellSize={effectiveCell}
             path={showPath ? level.path : null}
           />
-          <ul className="legend" aria-label="Умовні позначення">
-            {(showPath ? [...LEGEND, ["path", "Найкоротший шлях"]] : LEGEND).map(([type, name]) => (
-              <li key={type}>
-                <span className={`swatch swatch--${type}`} aria-hidden="true" />
-                {name}
-              </li>
-            ))}
-          </ul>
+          <Legend showPath={showPath} />
           <p className="sr-only" role="status">
             {status === "loading" ? "Генерація…" : `Показано: ${level.name}`}
           </p>

@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Generator from "./pages/Generator";
 import Gallery from "./pages/Gallery";
+import LevelPage from "./pages/LevelPage";
 import Login from "./pages/Login";
 
 export default function App() {
@@ -23,6 +24,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <Gallery />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/gallery/:id"
+          element={
+            <ProtectedRoute>
+              <LevelPage />
             </ProtectedRoute>
           }
         />

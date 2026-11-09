@@ -35,7 +35,9 @@ export default function Gallery() {
           {items.map((level) => (
             <li key={level.id} className="panel gallery-card">
               <Grid compact cells={level.cells} label={`Мініатюра: ${level.name}`} />
-              <h2>{level.name}</h2>
+              <h2>
+                <Link to={`/gallery/${level.id}`}>{level.name}</Link>
+              </h2>
               <p className="gallery-meta">
                 {level.width}×{level.height} · стіни:{" "}
                 {DENSITY_LABELS[level.density] ?? "—"} ·{" "}
@@ -44,9 +46,9 @@ export default function Gallery() {
               <div className="actions">
                 <button
                   className="btn"
-                  onClick={() => navigate("/", { state: { level } })}
+                  onClick={() => navigate(`/gallery/${level.id}`)}
                 >
-                  Відкрити
+                  Переглянути
                 </button>
                 <button
                   className="btn btn--secondary"

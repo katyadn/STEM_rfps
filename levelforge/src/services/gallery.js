@@ -89,3 +89,8 @@ export function saveLevel(userId, level) {
 export function deleteLevel(userId, levelId) {
   write(userId, read(userId).filter((item) => item.id !== levelId));
 }
+
+export function getSavedLevel(userId, levelId) {
+  const item = read(userId).find((i) => i.id === levelId);
+  return item ? parse(item) : null;
+}

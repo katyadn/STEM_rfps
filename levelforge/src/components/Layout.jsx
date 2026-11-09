@@ -99,6 +99,7 @@ export default function Layout({ children }) {
         </div>
 
         <nav className="side-nav" aria-label="Основна навігація">
+          <p className="side-label">Робочий простір</p>
           <NavLink to="/" end onClick={closeOnMobile}>Генератор</NavLink>
           <NavLink to="/gallery" onClick={closeOnMobile}>Моя галерея</NavLink>
         </nav>
