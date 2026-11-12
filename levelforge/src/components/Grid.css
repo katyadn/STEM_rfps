@@ -1,49 +1,36 @@
 /* Поле з прокруткою: великі карти не ламають сторінку */
 .grid-viewport {
-  overflow: auto;
-  max-width: 100%;
-  max-height: 70vh;
+  overflow: auto; max-width: 100%; max-height: 70vh;
   padding: var(--space-2);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--bg);
+  border: 2px solid var(--border-strong);
 }
-.grid {
-  display: grid;
-  grid-auto-rows: var(--cell);
-  gap: 2px;
-  width: max-content;
-  margin: 0 auto;
-}
+.grid { display: grid; grid-auto-rows: var(--cell); gap: 2px; width: max-content; margin: 0 auto; }
 .cell {
-  display: grid;
-  place-items: center;
-  border-radius: 3px;
-  font-size: calc(var(--cell, 20px) * 0.45);
+  display: grid; place-items: center;
   font-weight: 700;
+  font-size: calc(var(--cell, 20px) * 0.5);
   color: #0b0b12;
 }
 .cell--floor { background: var(--cell-floor); }
 .cell--wall { background: var(--cell-wall); }
 .cell--start { background: var(--cell-start); }
-.cell--end { background: var(--cell-end); }
+.cell--end { background: var(--cell-end); color: #fff; }
 .cell--treasure { background: var(--cell-floor); }
 .cell--treasure::after { content: ""; width: 40%; height: 40%; background: var(--cell-treasure); transform: rotate(45deg); }
 .cell--enemy { background: var(--cell-floor); }
-.cell--enemy::after { content: ""; width: 45%; height: 45%; background: var(--cell-enemy); border-radius: 50%; }
+.cell--enemy::after { content: ""; width: 45%; height: 45%; background: var(--cell-enemy); }
 
 /* Підсвітка найкоротшого шляху */
 .cell--path.cell--floor { background: var(--cell-path); }
-.cell--path.cell--treasure,
-.cell--path.cell--enemy { outline: 2px solid var(--cell-path); outline-offset: -2px; }
+.cell--path.cell--treasure, .cell--path.cell--enemy { outline: 2px solid var(--cell-path); outline-offset: -2px; }
+
+/* Поява карти по клітинках (вимикається, якщо в системі обрано «менше руху») */
+@keyframes cell-in { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .grid:not(.grid--compact) .cell { animation: cell-in 0.28s ease-out both; animation-delay: calc(var(--d, 0) * 14ms); }
+}
 
 /* Мініатюра для галереї */
-.grid--compact {
-  gap: 1px;
-  padding: var(--space-1);
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.grid--compact .cell { aspect-ratio: 1; border-radius: 1px; }
+.grid--compact { gap: 1px; width: 100%; padding: var(--space-1); background: var(--bg); border: 2px solid var(--border-strong); }
+.grid--compact .cell { aspect-ratio: 1; }

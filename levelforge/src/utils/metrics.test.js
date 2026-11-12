@@ -1,3 +1,4 @@
+// Метрики рахуються на клієнті й виводяться в панелі, тому їх коректність важлива для UI.
 import { describe, expect, it } from "vitest";
 import { parse } from "../data/levels";
 import { countCells, getMetrics } from "./metrics";

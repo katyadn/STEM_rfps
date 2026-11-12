@@ -1,14 +1,21 @@
-.page-title { font-size: 1.4rem; margin: 0 0 var(--space-4); }
+.page-title { font-size: 2rem; margin-bottom: var(--space-4); }
+/* Галерея як «контактний аркуш»: мініатюри плиткою, без карток */
 .gallery-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--space-4);
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: var(--space-5) var(--space-4);
 }
 .gallery-card { display: grid; gap: var(--space-2); align-content: start; }
-.gallery-card h2 { margin: var(--space-2) 0 0; font-size: 1rem; }
-.gallery-meta { margin: 0; color: var(--text-muted); font-size: 0.85rem; }
+.gallery-card h2 { font-family: var(--font); font-size: 1rem; margin: var(--space-2) 0 0; }
 .gallery-card h2 a { color: inherit; text-decoration: none; }
 .gallery-card h2 a:hover { text-decoration: underline; }
+.gallery-meta { color: var(--text-muted); font-size: 0.85rem; }
+/* Кнопки в галереї — текстові посилання, щоб не множити рамки */
+.gallery-card .actions { gap: var(--space-4); }
+.gallery-card .btn, .gallery-card .btn--secondary {
+  background: none; border: 0; box-shadow: none; padding: 0;
+  color: var(--text); text-decoration: underline; text-underline-offset: 3px; font-weight: 500;
+}
+.gallery-card .btn--secondary { color: var(--text-muted); }
+.gallery-card .btn:hover:not(:disabled) { transform: none; box-shadow: none; background: none; }
+.empty-state { max-width: 48ch; display: grid; gap: var(--space-3); justify-items: start; }

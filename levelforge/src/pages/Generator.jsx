@@ -88,12 +88,13 @@ export default function Generator() {
   return (
     <div className="page generator">
       <div className="generator-main">
-        <section className="panel level-panel">
+        <section className="level-panel">
           <div className="level-head">
             <h2>{level.name}</h2>
             <span>{level.width}×{level.height}</span>
           </div>
           <Grid
+            key={level.id}
             cells={level.cells}
             label={gridLabel}
             cellSize={effectiveCell}
@@ -108,40 +109,45 @@ export default function Generator() {
         <MetricsPanel level={level} />
       </div>
 
-      <aside className="panel">
+      <aside className="settings">
         <h2>Налаштування</h2>
 
-        <div className="field">
-          <label htmlFor="size">Розмір карти</label>
-          <select id="size" value={sizeId} onChange={(e) => handleSizeChange(e.target.value)}>
-            {SIZES.map((s) => (
-              <option key={s.id} value={s.id}>{s.width} × {s.height}</option>
-            ))}
-          </select>
-        </div>
+        <section className="set-group">
+          <h3>Карта</h3>
+          <div className="field">
+            <label htmlFor="size">Розмір карти</label>
+            <select id="size" value={sizeId} onChange={(e) => handleSizeChange(e.target.value)}>
+              {SIZES.map((s) => (
+                <option key={s.id} value={s.id}>{s.width} × {s.height}</option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
+            <label htmlFor="density">Щільність стін</label>
+            <select id="density" value={density} onChange={(e) => setDensity(e.target.value)}>
+              {Object.entries(DENSITY_LABELS).map(([id, name]) => (
+                <option key={id} value={id}>{name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
+            <label htmlFor="seed">Seed</label>
+            <input id="seed" value={seed} maxLength={16}
+              onChange={(e) => handleSeedChange(e.target.value)} />
+            <span className="hint">Введіть seed, щоб відтворити рівень</span>
+          </div>
+        </section>
 
-        <div className="field">
-          <label htmlFor="density">Щільність стін</label>
-          <select id="density" value={density} onChange={(e) => setDensity(e.target.value)}>
-            {Object.entries(DENSITY_LABELS).map(([id, name]) => (
-              <option key={id} value={id}>{name}</option>
-            ))}
-          </select>
-        </div>
+        <section className="set-group">
+          <h3>Об’єкти</h3>
+          <CountField id="enemies" label="Вороги" value={enemies}
+            max={limits.enemies} onChange={setEnemies} />
+          <CountField id="treasures" label="Скарби" value={treasures}
+            max={limits.treasures} onChange={setTreasures} />
+        </section>
 
-        <CountField id="enemies" label="Вороги" value={enemies}
-          max={limits.enemies} onChange={setEnemies} />
-        <CountField id="treasures" label="Скарби" value={treasures}
-          max={limits.treasures} onChange={setTreasures} />
-
-        <div className="field">
-          <label htmlFor="seed">Seed</label>
-          <input id="seed" value={seed} maxLength={16}
-            onChange={(e) => handleSeedChange(e.target.value)} />
-          <span className="hint">Введіть seed, щоб відтворити рівень</span>
-        </div>
-
-        <div className="settings-group">
+        <section className="set-group">
+          <h3>Відображення</h3>
           <label className="check">
             <input type="checkbox" checked={showPath}
               onChange={(e) => setShowPath(e.target.checked)} />
@@ -152,16 +158,7 @@ export default function Generator() {
             <input id="zoom" type="range" min="12" max="48" value={effectiveCell}
               onChange={(e) => setCellSize(Number(e.target.value))} />
           </div>
-        </div>
-
-        <div className="actions">
-          <button className="btn" onClick={handleGenerate} disabled={status === "loading"}>
-            {status === "loading" ? "Генерація…" : "Згенерувати"}
-          </button>
-          <button className="btn btn--secondary" onClick={handleSave} disabled={status === "loading"}>
-            Зберегти в галерею
-          </button>
-        </div>
+        </section>
 
         {status === "error" && (
           <p role="alert" className="form-error">
@@ -173,6 +170,15 @@ export default function Generator() {
             {saveMessage.text}
           </p>
         )}
+
+        <div className="action-bar">
+          <button className="btn" onClick={handleGenerate} disabled={status === "loading"}>
+            {status === "loading" ? "Генерація…" : "Згенерувати"}
+          </button>
+          <button className="btn btn--secondary" onClick={handleSave} disabled={status === "loading"}>
+            Зберегти в галерею
+          </button>
+        </div>
       </aside>
     </div>
   );

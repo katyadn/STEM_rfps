@@ -64,25 +64,15 @@ export default function Layout({ children }) {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  if (!user) {
-    return (
-      <>
-        <header className="topbar">
-          <span className="topbar-brand">LevelForge</span>
-        </header>
-        {children}
-      </>
-    );
-  }
+  // Гість бачить лише сторінку входу, без бічної панелі та верхньої смуги
+  if (!user) return children;
 
   return (
     <div className={`shell${open ? " shell--open" : ""}`}>
       <aside id="sidebar" className="sidebar" aria-label="Бічна панель">
         <div className="side-brand">
-          <span className="logo" aria-hidden="true" />
           <div>
             <strong>LevelForge</strong>
-            <small>Procedural Lab</small>
           </div>
           <button
             ref={closeBtnRef}

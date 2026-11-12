@@ -30,7 +30,7 @@ export default function MetricsPanel({ level }) {
         <div className="key">
           <span className="key-label">Збалансованість</span>
           <strong
-            className="key-value"
+            className="key-value key-value--num"
             aria-label={`Індекс збалансованості: ${m.balance} зі 100`}
           >
             {m.balance}

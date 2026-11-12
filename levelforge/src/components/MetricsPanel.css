@@ -1,15 +1,16 @@
-.metrics h2 { margin-bottom: var(--space-3); }
-
-.key-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
-  padding: var(--space-3) 0;
-  border-block: 1px solid var(--border);
+/* Метрики як «HUD» у грі: великі числа, тонкі лінії, жодних коробок */
+.metrics { border-top: 2px solid var(--border-strong); padding-top: var(--space-4); }
+.metrics h2, .settings h2, .level-bottom h2 {
+  font-family: var(--font); font-weight: 600; font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted);
+  margin-bottom: var(--space-3);
 }
-.key { display: grid; gap: 2px; align-content: start; }
-.key-label { color: var(--text-muted); font-size: 0.8rem; }
-.key-value { font-size: 1.5rem; line-height: 1.2; }
+.key-metrics { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: var(--space-4); }
+.key { display: grid; gap: 2px; align-content: start; padding: 0 var(--space-4); border-left: 1px solid var(--border-strong); }
+.key:first-child { padding-left: 0; border-left: 0; }
+.key-label { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.key-value { font-size: 1.5rem; font-weight: 600; line-height: 1.2; }
+.key-value--num { font-size: 1.9rem; }
 .key-value small { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
 .key-value--cap::first-letter { text-transform: uppercase; }
 .key-value.is-ok { color: var(--success); }
@@ -23,8 +24,9 @@
 
 .metrics-note { margin-top: var(--space-3); color: var(--text-muted); font-size: 0.85rem; }
 .metrics-note summary { cursor: pointer; }
-.metrics-note p { margin: var(--space-2) 0 0; }
+.metrics-note p { margin-top: var(--space-2); max-width: 60ch; }
 
 @media (max-width: 600px) {
-  .key-metrics { grid-template-columns: 1fr; }
+  .key-metrics { grid-template-columns: 1fr; gap: var(--space-3); }
+  .key, .key:first-child { padding: 0; border-left: 0; }
 }

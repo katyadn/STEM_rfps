@@ -96,8 +96,9 @@ export default function Login() {
   const isLogin = mode === "login";
 
   return (
-    <div className="page">
-      <section className="panel auth">
+    <div className="page auth-page">
+      <section className="auth">
+        <p className="auth-brand" aria-hidden="true">LevelForge</p>
         <h1>{isLogin ? "Вхід" : "Реєстрація"}</h1>
 
         <form onSubmit={handleSubmit} noValidate>

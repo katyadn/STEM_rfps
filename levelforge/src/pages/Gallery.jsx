@@ -22,7 +22,7 @@ export default function Gallery() {
       <h1 className="page-title">Моя галерея</h1>
 
       {items.length === 0 ? (
-        <section className="panel">
+        <section className="empty-state">
           <p>У галереї поки порожньо.</p>
           <p>
             Згенеруйте рівень і натисніть «Зберегти в галерею», щоб він

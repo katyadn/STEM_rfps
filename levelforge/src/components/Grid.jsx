@@ -16,6 +16,7 @@ export default function Grid({ cells, label, compact = false, cellSize = 28, pat
         <div
           key={`${x}-${y}`}
           className={`cell cell--${type}${onPath ? " cell--path" : ""}`}
+          style={compact ? undefined : { "--d": x }}
         >
           {!compact && cellSize >= 18 ? LABELS[type] : null}
         </div>

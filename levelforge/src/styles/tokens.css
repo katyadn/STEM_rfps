@@ -1,15 +1,17 @@
 /* Дизайн-токени: змінюєш тут — змінюється весь сайт */
 :root {
-  --bg: #12111a;
-  --surface: #1b1a26;
-  --surface-2: #252433;
-  --border: #34324a;
-  --text: #e9e7f5;
-  --text-muted: #9a97b5;
-  --accent: #8b6cf6;
-  --accent-text: #ffffff;
-  --danger: #f87171;
-  --success: #34d399;
+  /* інтерфейс: монохромний, колір залишено для карти */
+  --bg: #0f0f14;
+  --surface: #16161d;
+  --surface-2: #1d1d26;
+  --border: #2a2a35;
+  --border-strong: #4a4a5a;
+  --text: #ecedf2;
+  --text-muted: #9496a6;
+  --accent: #ecedf2;
+  --accent-text: #0f0f14;
+  --danger: #ff6b6b;
+  --success: #5ee08a;
 
   /* кольори клітинок */
   --cell-floor: #1f1e2c;
@@ -25,6 +27,7 @@
   --space-3: 16px;
   --space-4: 24px;
   --space-5: 40px;
-  --radius: 10px;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius: 2px;
+  --font: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Pixelify Sans", ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
