@@ -5,7 +5,6 @@ html { color-scheme: dark; }
 body {
   margin: 0;
   background-color: var(--bg);
-  /* ледь помітна клітинна сітка, як міліметрівка */
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
